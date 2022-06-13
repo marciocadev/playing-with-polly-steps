@@ -1,6 +1,6 @@
 # playing-with-polly-steps
 
-# step001
+# step001 (cria projeto e a infra do lambda)
 ## .projenrc.ts
 * release true
 * codecov true
@@ -12,3 +12,7 @@
 
 ## infra
 * create basic lambda
+
+## step002 (codifica o lambda e da permissão ao lambda para chamar o AWS Polly)
+## .projenrc.ts
+* deps: ['@aws-sdk/client-polly']
