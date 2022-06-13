@@ -1,11 +1,19 @@
 import { App, Stack, StackProps } from 'aws-cdk-lib';
+import { Architecture } from 'aws-cdk-lib/aws-lambda';
+import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
+import { join } from 'path';
 
 export class MyStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps = {}) {
     super(scope, id, props);
 
-    // define resources here...
+    new NodejsFunction(this, 'PollyLambda', {
+      functionName: 'playing-with-polly',
+      architecture: Architecture.ARM_64,
+      entry: join(__dirname, 'lambda-fns/index.ts'),
+      handler: 'handler',
+    });
   }
 }
 
