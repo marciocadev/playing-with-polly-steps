@@ -16,3 +16,10 @@
 ## step002 (codifica o lambda e da permissão ao lambda para chamar o AWS Polly)
 ## .projenrc.ts
 * deps: ['@aws-sdk/client-polly']
+
+## lambda
+* add login and tests
+
+## infra
+* create polly policy statement
+

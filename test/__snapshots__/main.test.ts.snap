@@ -12,6 +12,7 @@ Object {
   "Resources": Object {
     "PollyLambdaCC0E84BA": Object {
       "DependsOn": Array [
+        "PollyLambdaServiceRoleDefaultPolicy81DBEB21",
         "PollyLambdaServiceRoleEEA63C4F",
       ],
       "Properties": Object {
@@ -40,6 +41,27 @@ Object {
         "Runtime": "nodejs14.x",
       },
       "Type": "AWS::Lambda::Function",
+    },
+    "PollyLambdaServiceRoleDefaultPolicy81DBEB21": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "polly:SynthesizeSpeech",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "PollyLambdaServiceRoleDefaultPolicy81DBEB21",
+        "Roles": Array [
+          Object {
+            "Ref": "PollyLambdaServiceRoleEEA63C4F",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
     },
     "PollyLambdaServiceRoleEEA63C4F": Object {
       "Properties": Object {
