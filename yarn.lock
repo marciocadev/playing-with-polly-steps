@@ -83,7 +83,7 @@
     "@aws-sdk/types" "3.109.0"
     tslib "^2.3.1"
 
-"@aws-sdk/client-polly@^3.109.0":
+"@aws-sdk/client-polly@^3.105.0":
   version "3.109.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/client-polly/-/client-polly-3.109.0.tgz#acda266e990320e47f4cfdf85491d722c4efa83b"
   integrity sha512-069IeAWRLCPyA0L8KrKNKp9xxMABaqNEoXrtCpIotv8GSswrFYmApaJzOEbZcoTJTsDVFxBQhzhwCq7KB/PFcg==
