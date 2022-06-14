@@ -10,6 +10,97 @@ Object {
     },
   },
   "Resources": Object {
+    "PollyHttpApiD659CEE8": Object {
+      "Properties": Object {
+        "Name": "polly-httpapi",
+        "ProtocolType": "HTTP",
+      },
+      "Type": "AWS::ApiGatewayV2::Api",
+    },
+    "PollyHttpApiDefaultStageEB762F2E": Object {
+      "Properties": Object {
+        "ApiId": Object {
+          "Ref": "PollyHttpApiD659CEE8",
+        },
+        "AutoDeploy": true,
+        "StageName": "$default",
+      },
+      "Type": "AWS::ApiGatewayV2::Stage",
+    },
+    "PollyHttpApiPOSTspeechvoiceFCFCCD9F": Object {
+      "Properties": Object {
+        "ApiId": Object {
+          "Ref": "PollyHttpApiD659CEE8",
+        },
+        "AuthorizationType": "NONE",
+        "RouteKey": "POST /speech/{voice}",
+        "Target": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "integrations/",
+              Object {
+                "Ref": "PollyHttpApiPOSTspeechvoiceIntegration13C91CF5",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "PollyHttpApiPOSTspeechvoiceIntegration13C91CF5": Object {
+      "Properties": Object {
+        "ApiId": Object {
+          "Ref": "PollyHttpApiD659CEE8",
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": Object {
+          "Fn::GetAtt": Array [
+            "PollyLambdaCC0E84BA",
+            "Arn",
+          ],
+        },
+        "PayloadFormatVersion": "2.0",
+      },
+      "Type": "AWS::ApiGatewayV2::Integration",
+    },
+    "PollyHttpApiPOSTspeechvoiceIntegrationPermissionFA1F35C8": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "PollyLambdaCC0E84BA",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "PollyHttpApiD659CEE8",
+              },
+              "/*/*/speech/{voice}",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
     "PollyLambdaCC0E84BA": Object {
       "DependsOn": Array [
         "PollyLambdaServiceRoleDefaultPolicy81DBEB21",
@@ -23,7 +114,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "61643f5970b2ced23e2cee4b2fc106469c9e830ab9d06719de8ae55a53efdb27.zip",
+          "S3Key": "8dfadafc28f3d399def0ad812c059ac4692fa32ac240cc980dc58a41695e1bb7.zip",
         },
         "Environment": Object {
           "Variables": Object {
@@ -39,6 +130,7 @@ Object {
           ],
         },
         "Runtime": "nodejs14.x",
+        "Timeout": 30,
       },
       "Type": "AWS::Lambda::Function",
     },

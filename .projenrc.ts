@@ -11,6 +11,8 @@ const project = new awscdk.AwsCdkTypeScriptApp({
   deps: [
     '@aws-sdk/client-polly',
     '@types/aws-lambda',
+    '@aws-cdk/aws-apigatewayv2-alpha@2.27.0-alpha.0',
+    '@aws-cdk/aws-apigatewayv2-integrations-alpha@2.27.0-alpha.0',
   ],
   devDeps: ['aws-sdk-client-mock'],
 });

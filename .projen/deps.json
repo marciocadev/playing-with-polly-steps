@@ -91,6 +91,16 @@
       "type": "build"
     },
     {
+      "name": "@aws-cdk/aws-apigatewayv2-alpha",
+      "version": "2.27.0-alpha.0",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-apigatewayv2-integrations-alpha",
+      "version": "2.27.0-alpha.0",
+      "type": "runtime"
+    },
+    {
       "name": "@aws-sdk/client-polly",
       "type": "runtime"
     },

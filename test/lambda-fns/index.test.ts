@@ -17,12 +17,41 @@ describe('Polly lambda', () => {
 
     const event = {
       body: '1, 2, 3, testando',
+      pathParameters: {
+        voice: 'Camila',
+      },
     } as any;
 
     const result = await handler(event);
 
     expect(result).toMatchObject({
       statusCode: 200,
+    });
+  });
+
+  test('fail without text', async() => {
+    const event = {
+      pathParameters: {
+        voice: 'Camila',
+      },
+    } as any;
+
+    const result = await handler(event);
+
+    expect(result).toMatchObject({
+      statusCode: 400,
+    });
+  });
+
+  test('fail without voice', async() => {
+    const event = {
+      body: '1, 2, 3, testando',
+    } as any;
+
+    const result = await handler(event);
+
+    expect(result).toMatchObject({
+      statusCode: 400,
     });
   });
 });
