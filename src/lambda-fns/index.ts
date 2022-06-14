@@ -6,17 +6,18 @@ const pollyClient = new PollyClient({ region: process.env.AWS_REGION });
 
 export const handler = async(event:APIGatewayProxyEventV2) => {
 
-  if (!event?.body) {
+  if (!event?.body || !event?.pathParameters) {
     return {
       statusCode: 400,
     };
   }
 
+  let { voice } = event.pathParameters;
   let text = event.body;
 
   const input:SynthesizeSpeechInput = {
     Text: text,
-    VoiceId: 'Vitoria',
+    VoiceId: voice,
     Engine: Engine.NEURAL,
     TextType: TextType.TEXT,
     OutputFormat: OutputFormat.MP3,

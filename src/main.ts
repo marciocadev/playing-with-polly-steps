@@ -1,5 +1,7 @@
 import { join } from 'path';
-import { App, Stack, StackProps } from 'aws-cdk-lib';
+import { HttpApi, HttpMethod } from '@aws-cdk/aws-apigatewayv2-alpha';
+import { HttpLambdaIntegration } from '@aws-cdk/aws-apigatewayv2-integrations-alpha';
+import { App, Duration, Stack, StackProps } from 'aws-cdk-lib';
 import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Architecture } from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
@@ -23,8 +25,18 @@ export class MyStack extends Stack {
       architecture: Architecture.ARM_64,
       entry: join(__dirname, 'lambda-fns/index.ts'),
       handler: 'handler',
+      timeout: Duration.seconds(30),
     });
     lambda.addToRolePolicy(pollyStatement);
+
+    const rest = new HttpApi(this, 'PollyHttpApi', {
+      apiName: 'polly-httpapi',
+    });
+    rest.addRoutes({
+      path: '/speech/{voice}',
+      methods: [HttpMethod.POST],
+      integration: new HttpLambdaIntegration('Integration', lambda),
+    });
   }
 }
 
