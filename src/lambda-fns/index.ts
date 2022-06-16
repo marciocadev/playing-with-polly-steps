@@ -26,7 +26,6 @@ export const handler = async(event:APIGatewayProxyEventV2) => {
   try {
     synth = await pollyClient.send(command);
   } catch (err:any) {
-    console.log(err);
     throw err;
   }
 
