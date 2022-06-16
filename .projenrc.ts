@@ -7,6 +7,7 @@ const project = new awscdk.AwsCdkTypeScriptApp({
 
   codeCov: true,
   release: true,
+  majorVersion: 1,
 
   deps: [
     '@aws-sdk/client-polly',
