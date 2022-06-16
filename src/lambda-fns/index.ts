@@ -8,14 +8,6 @@ export const handler = async(event:APIGatewayProxyEventV2) => {
 
   if (!event?.body || !event?.pathParameters) {
     throw new Error('text or voice not found');
-    // throw new PollyServiceException({
-    //   message: 'body vazio',
-    //   name: 'Error',
-    //   $fault: 'client',
-    //   $metadata: {
-    //     httpStatusCode: 400,
-    //   },
-    // });
   }
 
   let { voice } = event.pathParameters;
@@ -33,7 +25,8 @@ export const handler = async(event:APIGatewayProxyEventV2) => {
   let synth;
   try {
     synth = await pollyClient.send(command);
-  } catch (err) {
+  } catch (err:any) {
+    console.log(err);
     throw err;
   }
 

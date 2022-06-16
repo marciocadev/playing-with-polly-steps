@@ -29,6 +29,24 @@ describe('Polly lambda', () => {
     });
   });
 
+  test('fail with standard voice', async() => {
+    pollyMock.on(SynthesizeSpeechCommand).rejects({
+      name: 'ValidationException',
+      message: 'This voice does not support the selected engine: neural',
+    });
+
+    const event = {
+      body: '1, 2, 3, testando',
+      pathParameters: {
+        voice: 'Ricardo',
+      },
+    } as any;
+
+    await expect(async() => {
+      await handler(event);
+    }).rejects.toThrowError('This voice does not support the selected engine: neural');
+  });
+
   test('fail without text', async() => {
     const event = {
       pathParameters: {
