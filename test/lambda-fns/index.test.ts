@@ -29,6 +29,24 @@ describe('Polly lambda', () => {
     });
   });
 
+  test('fail with standard voice', async() => {
+    pollyMock.on(SynthesizeSpeechCommand).rejects({
+      name: 'ValidationException',
+      message: 'This voice does not support the selected engine: neural',
+    });
+
+    const event = {
+      body: '1, 2, 3, testando',
+      pathParameters: {
+        voice: 'Ricardo',
+      },
+    } as any;
+
+    await expect(async() => {
+      await handler(event);
+    }).rejects.toThrowError('This voice does not support the selected engine: neural');
+  });
+
   test('fail without text', async() => {
     const event = {
       pathParameters: {
@@ -36,11 +54,9 @@ describe('Polly lambda', () => {
       },
     } as any;
 
-    const result = await handler(event);
-
-    expect(result).toMatchObject({
-      statusCode: 400,
-    });
+    await expect(async() => {
+      await handler(event);
+    }).rejects.toThrowError('text or voice not found');
   });
 
   test('fail without voice', async() => {
@@ -48,10 +64,8 @@ describe('Polly lambda', () => {
       body: '1, 2, 3, testando',
     } as any;
 
-    const result = await handler(event);
-
-    expect(result).toMatchObject({
-      statusCode: 400,
-    });
+    await expect(async() => {
+      await handler(event);
+    }).rejects.toThrowError('text or voice not found');
   });
 });

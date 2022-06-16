@@ -7,9 +7,7 @@ const pollyClient = new PollyClient({ region: process.env.AWS_REGION });
 export const handler = async(event:APIGatewayProxyEventV2) => {
 
   if (!event?.body || !event?.pathParameters) {
-    return {
-      statusCode: 400,
-    };
+    throw new Error('text or voice not found');
   }
 
   let { voice } = event.pathParameters;
@@ -23,7 +21,13 @@ export const handler = async(event:APIGatewayProxyEventV2) => {
     OutputFormat: OutputFormat.MP3,
   };
   const command = new SynthesizeSpeechCommand(input);
-  const synth = await pollyClient.send(command);
+
+  let synth;
+  try {
+    synth = await pollyClient.send(command);
+  } catch (err:any) {
+    throw err;
+  }
 
   const buffer = await stream2buffer(synth.AudioStream);
 

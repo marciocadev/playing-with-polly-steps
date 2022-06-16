@@ -1,0 +1,126 @@
+{
+  "levelFilter": 3,
+  "scale": 0.5858620439525941,
+  "showHidden": true,
+  "widgets": {
+    "playing-with-polly-steps-dev/PollyHttpApi/POST--speech--{voice}": {
+      "isVisible": true,
+      "position": {
+        "x": -279.2017177086272,
+        "y": -567.9768983548222
+      }
+    },
+    "playing-with-polly-steps-dev/PollyHttpApi/DefaultStage": {
+      "isVisible": true,
+      "position": {
+        "x": 179.06691117969007,
+        "y": -615.8240062012658
+      }
+    },
+    "playing-with-polly-steps-dev/PollyLambda/Resource": {
+      "isVisible": true,
+      "position": {
+        "x": 612.2723168206712,
+        "y": 382.1000109542903
+      }
+    },
+    "playing-with-polly-steps-dev/PollyHttpApi/Resource": {
+      "isVisible": true,
+      "position": {
+        "x": 663.3777115073613,
+        "y": -337.41049115650725
+      }
+    },
+    "playing-with-polly-steps-dev/PollyLambda/Code": {
+      "isVisible": true,
+      "position": {
+        "x": 994.1796240262001,
+        "y": -278.4135150447586
+      }
+    },
+    "playing-with-polly-steps-dev/PollyLambda/ServiceRole": {
+      "isVisible": true,
+      "position": {
+        "x": 817.8761995632358,
+        "y": 74.58547699249118
+      }
+    },
+    "playing-with-polly-steps-dev/PollyLambda": {
+      "isVisible": true,
+      "position": {
+        "x": 496.44831061940545,
+        "y": 150.94679867527964
+      }
+    },
+    "playing-with-polly-steps-dev/PollyLambda/Code/AssetBucket": {
+      "isVisible": true,
+      "position": {
+        "x": 342.36991073753956,
+        "y": -407.51042397370554
+      }
+    },
+    "playing-with-polly-steps-dev/PollyLambda/Code/Stage": {
+      "isVisible": true,
+      "position": {
+        "x": 520.8032635436971,
+        "y": -144.13689740990054
+      }
+    },
+    "playing-with-polly-steps-dev/PollyLambda/ServiceRole/DefaultPolicy": {
+      "isVisible": true,
+      "position": {
+        "x": 499.88033471124527,
+        "y": 252.25021984068397
+      }
+    },
+    "playing-with-polly-steps-dev/PollyLambda/ServiceRole/Resource": {
+      "isVisible": true,
+      "position": {
+        "x": 574.2973697989173,
+        "y": -92.12873855065811
+      }
+    },
+    "playing-with-polly-steps-dev/PollyHttpApi/POST--speech--{voice}/Integration": {
+      "isVisible": true,
+      "position": {
+        "x": -494.27712159703685,
+        "y": -312.22726684297197
+      }
+    },
+    "playing-with-polly-steps-dev/PollyHttpApi/POST--speech--{voice}/Resource": {
+      "isVisible": true,
+      "position": {
+        "x": -109.21292350380753,
+        "y": -489.0923566164424
+      }
+    },
+    "playing-with-polly-steps-dev/PollyHttpApi/POST--speech--{voice}/Integration-Permission": {
+      "isVisible": true,
+      "position": {
+        "x": 290.5400655658147,
+        "y": -453.0992900823215
+      }
+    },
+    "playing-with-polly-steps-dev/PollyHttpApi/POST--speech--{voice}/Integration/Resource": {
+      "isVisible": true,
+      "position": {
+        "x": -324.52249108046965,
+        "y": 445.60590510598905
+      }
+    },
+    "root": {
+      "isVisible": true
+    },
+    "playing-with-polly-steps-dev": {
+      "isVisible": true
+    },
+    "playing-with-polly-steps-dev/PollyHttpApi": {
+      "isVisible": false
+    }
+  },
+  "workbenchPosition": {
+    "x": 1329.554124160731,
+    "y": 501.7235912215746
+  },
+  "workingDirectory": "/home/marcio/marciocadev/playing-with-polly-steps"
+}
