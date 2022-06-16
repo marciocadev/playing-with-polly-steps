@@ -1,5 +1,8 @@
 # playing-with-polly-steps
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-yellowgreen.svg)](https://opensource.org/licenses/Apache-2.0)
+[![codecov](https://codecov.io/gh/marciocadev/playing-with-polly-steps/branch/main/graph/badge.svg?token=VRDc2ztywC)](https://codecov.io/gh/marciocadev/playing-with-polly-steps)
+
 ## Texto (Dom Casmurro)
 Uma noite destas, vindo da cidade para o Engenho Novo, encontrei no trem da Central um rapaz aqui do bairro, que eu conheço de vista e de chapéu. Cumprimentou-me, sentou-se ao pé de mim, falou da lua e dos ministros, e acabou recitando-me versos. A viagem era curta, e os versos pode ser que não fossem inteiramente maus. Sucedeu, porém, que, como eu estava cansado, fechei os olhos três ou quatro vezes; tanto bastou para que ele interrompesse a leitura e metesse os versos no bolso.
 
