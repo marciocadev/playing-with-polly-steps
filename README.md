@@ -67,3 +67,6 @@ create a new slack client (connect with login stack)
 
 ## deploy
 cdk deploy --parameters SlackWorkspaceId=T03\*\*\*\*\*H09 --parameters SlackChannelId=C03\*\*\*\*\*TCJ
+
+# step005
+Upgrade major version
