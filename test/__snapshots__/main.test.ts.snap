@@ -8,6 +8,14 @@ Object {
       "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
+    "SlackChannelId": Object {
+      "Description": "Enter slack channel id",
+      "Type": "String",
+    },
+    "SlackWorkspaceId": Object {
+      "Description": "Enter slack workspace id",
+      "Type": "String",
+    },
   },
   "Resources": Object {
     "ErrorTopicA0904A23": Object {
@@ -49,7 +57,7 @@ Object {
     },
     "MySlackE351F6F6": Object {
       "Properties": Object {
-        "ConfigurationName": "error-message",
+        "ConfigurationName": "playing-with-polly",
         "IamRoleArn": Object {
           "Fn::GetAtt": Array [
             "MySlackConfigurationRole8B3F1633",
@@ -57,8 +65,12 @@ Object {
           ],
         },
         "LoggingLevel": "INFO",
-        "SlackChannelId": "C03KEL2P2KH",
-        "SlackWorkspaceId": "T03L7TWLH09",
+        "SlackChannelId": Object {
+          "Ref": "SlackChannelId",
+        },
+        "SlackWorkspaceId": Object {
+          "Ref": "SlackWorkspaceId",
+        },
         "SnsTopicArns": Array [
           Object {
             "Ref": "ErrorTopicA0904A23",

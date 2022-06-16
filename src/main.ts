@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { HttpApi, HttpMethod } from '@aws-cdk/aws-apigatewayv2-alpha';
 import { HttpLambdaIntegration } from '@aws-cdk/aws-apigatewayv2-integrations-alpha';
-import { App, Duration, Stack, StackProps } from 'aws-cdk-lib';
+import { App, CfnParameter, Duration, Stack, StackProps } from 'aws-cdk-lib';
 import { LoggingLevel, SlackChannelConfiguration } from 'aws-cdk-lib/aws-chatbot';
 import { Alarm, ComparisonOperator } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
@@ -60,10 +60,19 @@ export class MyStack extends Stack {
       integration: new HttpLambdaIntegration('Integration', lambda),
     });
 
+    const slackChannelId = new CfnParameter(this, 'SlackChannelId', {
+      type: 'String',
+      description: 'Enter slack channel id',
+    });
+    const slackWorkspaceId = new CfnParameter(this, 'SlackWorkspaceId', {
+      type: 'String',
+      description: 'Enter slack workspace id',
+    });
+
     const slack = new SlackChannelConfiguration(this, 'MySlack', {
-      slackChannelConfigurationName: 'error-message',
-      slackWorkspaceId: 'T03L7TWLH09',
-      slackChannelId: 'C03KEL2P2KH',
+      slackChannelConfigurationName: 'playing-with-polly',
+      slackWorkspaceId: slackWorkspaceId.valueAsString, //'T03L7TWLH09',
+      slackChannelId: slackChannelId.valueAsString, //'C03KEL2P2KH',
       notificationTopics: [topic],
       loggingLevel: LoggingLevel.INFO,
     });

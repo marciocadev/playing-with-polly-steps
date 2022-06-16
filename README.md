@@ -58,3 +58,12 @@ Create the HttpApi with path and voice param and change lambda to use the voice 
 Exemplos:
 pt-BR: Camila e Vitoria
 pt-PT: Ines
+
+# step004
+Adding lambda error alarm and integration with slack channel
+
+## AWS Chatbot
+create a new slack client (connect with login stack)
+
+## deploy
+cdk deploy --parameters SlackWorkspaceId=T03\*\*\*\*\*H09 --parameters SlackChannelId=C03\*\*\*\*\*TCJ

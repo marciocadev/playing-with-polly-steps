@@ -1,6 +1,6 @@
 import { awscdk } from 'projen';
 const project = new awscdk.AwsCdkTypeScriptApp({
-  cdkVersion: '2.27.0',
+  cdkVersion: '2.28.0',
   defaultReleaseBranch: 'main',
   name: 'playing-with-polly-steps',
   projenrcTs: true,
