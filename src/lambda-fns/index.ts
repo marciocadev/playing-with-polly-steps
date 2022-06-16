@@ -1,5 +1,5 @@
 import { Stream } from 'stream';
-import { Engine, OutputFormat, PollyClient, SynthesizeSpeechCommand, SynthesizeSpeechInput, TextType } from '@aws-sdk/client-polly';
+import { Engine, OutputFormat, PollyClient, PollyServiceException, SynthesizeSpeechCommand, SynthesizeSpeechInput, TextType } from '@aws-sdk/client-polly';
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda';
 
 const pollyClient = new PollyClient({ region: process.env.AWS_REGION });
@@ -7,9 +7,14 @@ const pollyClient = new PollyClient({ region: process.env.AWS_REGION });
 export const handler = async(event:APIGatewayProxyEventV2) => {
 
   if (!event?.body || !event?.pathParameters) {
-    return {
-      statusCode: 400,
-    };
+    throw new PollyServiceException({
+      message: 'body vazio',
+      name: 'Error',
+      $fault: 'client',
+      $metadata: {
+        httpStatusCode: 400,
+      }
+    });
   }
 
   let { voice } = event.pathParameters;
