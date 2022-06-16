@@ -2,14 +2,14 @@ import { join } from 'path';
 import { HttpApi, HttpMethod } from '@aws-cdk/aws-apigatewayv2-alpha';
 import { HttpLambdaIntegration } from '@aws-cdk/aws-apigatewayv2-integrations-alpha';
 import { App, Duration, Stack, StackProps } from 'aws-cdk-lib';
+import { LoggingLevel, SlackChannelConfiguration } from 'aws-cdk-lib/aws-chatbot';
+import { Alarm, ComparisonOperator } from 'aws-cdk-lib/aws-cloudwatch';
+import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import { Effect, ManagedPolicy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Architecture } from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
-import { Construct } from 'constructs';
-import { LoggingLevel, SlackChannelConfiguration } from 'aws-cdk-lib/aws-chatbot';
 import { Topic } from 'aws-cdk-lib/aws-sns';
-import { Alarm, ComparisonOperator } from 'aws-cdk-lib/aws-cloudwatch';
-import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
+import { Construct } from 'constructs';
 
 export class MyStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps = {}) {
@@ -70,7 +70,7 @@ export class MyStack extends Stack {
     slack.role?.addManagedPolicy(
       ManagedPolicy.fromAwsManagedPolicyName('CloudWatchReadOnlyAccess'),
     );
-    
+
   }
 }
 

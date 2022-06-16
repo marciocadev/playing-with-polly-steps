@@ -36,11 +36,9 @@ describe('Polly lambda', () => {
       },
     } as any;
 
-    const result = await handler(event);
-
-    expect(result).toMatchObject({
-      statusCode: 400,
-    });
+    await expect(async() => {
+      await handler(event);
+    }).rejects.toThrowError('text or voice not found');
   });
 
   test('fail without voice', async() => {
@@ -48,10 +46,8 @@ describe('Polly lambda', () => {
       body: '1, 2, 3, testando',
     } as any;
 
-    const result = await handler(event);
-
-    expect(result).toMatchObject({
-      statusCode: 400,
-    });
+    await expect(async() => {
+      await handler(event);
+    }).rejects.toThrowError('text or voice not found');
   });
 });

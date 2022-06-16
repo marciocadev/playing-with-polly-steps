@@ -1,5 +1,5 @@
 import { Stream } from 'stream';
-import { Engine, OutputFormat, PollyClient, PollyServiceException, SynthesizeSpeechCommand, SynthesizeSpeechInput, TextType } from '@aws-sdk/client-polly';
+import { Engine, OutputFormat, PollyClient, SynthesizeSpeechCommand, SynthesizeSpeechInput, TextType } from '@aws-sdk/client-polly';
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda';
 
 const pollyClient = new PollyClient({ region: process.env.AWS_REGION });
@@ -7,14 +7,15 @@ const pollyClient = new PollyClient({ region: process.env.AWS_REGION });
 export const handler = async(event:APIGatewayProxyEventV2) => {
 
   if (!event?.body || !event?.pathParameters) {
-    throw new PollyServiceException({
-      message: 'body vazio',
-      name: 'Error',
-      $fault: 'client',
-      $metadata: {
-        httpStatusCode: 400,
-      }
-    });
+    throw new Error('text or voice not found');
+    // throw new PollyServiceException({
+    //   message: 'body vazio',
+    //   name: 'Error',
+    //   $fault: 'client',
+    //   $metadata: {
+    //     httpStatusCode: 400,
+    //   },
+    // });
   }
 
   let { voice } = event.pathParameters;
@@ -28,7 +29,13 @@ export const handler = async(event:APIGatewayProxyEventV2) => {
     OutputFormat: OutputFormat.MP3,
   };
   const command = new SynthesizeSpeechCommand(input);
-  const synth = await pollyClient.send(command);
+
+  let synth;
+  try {
+    synth = await pollyClient.send(command);
+  } catch (err) {
+    throw err;
+  }
 
   const buffer = await stream2buffer(synth.AudioStream);
 

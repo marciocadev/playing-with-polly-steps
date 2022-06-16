@@ -10,6 +10,94 @@ Object {
     },
   },
   "Resources": Object {
+    "ErrorTopicA0904A23": Object {
+      "Properties": Object {
+        "TopicName": "polly-error-topic",
+      },
+      "Type": "AWS::SNS::Topic",
+    },
+    "MySlackConfigurationRole8B3F1633": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "chatbot.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/CloudWatchReadOnlyAccess",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "MySlackE351F6F6": Object {
+      "Properties": Object {
+        "ConfigurationName": "error-message",
+        "IamRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "MySlackConfigurationRole8B3F1633",
+            "Arn",
+          ],
+        },
+        "LoggingLevel": "INFO",
+        "SlackChannelId": "C03KEL2P2KH",
+        "SlackWorkspaceId": "T03L7TWLH09",
+        "SnsTopicArns": Array [
+          Object {
+            "Ref": "ErrorTopicA0904A23",
+          },
+        ],
+      },
+      "Type": "AWS::Chatbot::SlackChannelConfiguration",
+    },
+    "PollyAlarm440D1EF0": Object {
+      "Properties": Object {
+        "AlarmActions": Array [
+          Object {
+            "Ref": "ErrorTopicA0904A23",
+          },
+        ],
+        "AlarmName": "polly-alarm-error",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": Array [
+          Object {
+            "Name": "FunctionName",
+            "Value": Object {
+              "Ref": "PollyLambdaCC0E84BA",
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "Errors",
+        "Namespace": "AWS/Lambda",
+        "OKActions": Array [
+          Object {
+            "Ref": "ErrorTopicA0904A23",
+          },
+        ],
+        "Period": 60,
+        "Statistic": "Sum",
+        "Threshold": 1,
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
     "PollyHttpApiD659CEE8": Object {
       "Properties": Object {
         "Name": "polly-httpapi",
@@ -114,7 +202,7 @@ Object {
           "S3Bucket": Object {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "8dfadafc28f3d399def0ad812c059ac4692fa32ac240cc980dc58a41695e1bb7.zip",
+          "S3Key": "67aeb28ca46e3de976c5b71c267b7fe3b32d1d6a1f5d90d97ab976a6e3a0a5e5.zip",
         },
         "Environment": Object {
           "Variables": Object {
